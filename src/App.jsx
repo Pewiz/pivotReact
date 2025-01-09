@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ReactPivot from "react-pivot-webpack";
+import "./App.css";
 
 const PivotTable = () => {
   const [data, setData] = useState([]);
@@ -19,7 +20,7 @@ const PivotTable = () => {
       );
       if (thElements) {
         const thValues = Array.from(thElements)
-          .slice(0, -3)
+          .slice(0, -2)
           .map((th) => th.textContent.trim());
         setHeaders(thValues);
       }
@@ -69,7 +70,6 @@ const PivotTable = () => {
 
   function filterDataByKey(data, dimensions, _key) {
     const parsedKey = parseKeyToObject(_key);
-    console.log("ParsedKey: ", parsedKey);
     return data.filter((item) => {
       return Object.entries(parsedKey).every(([key, value]) => {
         const dimension = dimensions.find((d) => d.title === key);
@@ -79,29 +79,28 @@ const PivotTable = () => {
   }
 
   const calculations = [
+    // {
+    //   title: "Cantidad",
+    //   value: "Quantity",
+    // },
     {
-      title: "Cantidad",
-      value: "Quantity",
-    },
-    {
-      title: "Porcentaje 1",
+      title: "Porcentaje",
       value: "Percentage",
       template: function (val, row) {
         let total = 0;
         let dataKey = filterDataByKey(data, dimensions, row._key);
         dataKey.forEach((value) => (total += value.Quantity));
-        console.log("DataKey", dataKey);
-        return ((row.Quantity / total) * 100).toFixed(1);
+        return ((row.Quantity / total) * 100).toFixed(1) + " %";
       },
     },
     {
       title: "Porcentaje Total",
-      value: "Percentageee",
+      value: "PercentageTotal",
       template: function (val, row) {
         let total = 0;
         data.forEach((value) => (total += value.Quantity));
 
-        return ((row.Quantity / total) * 100).toFixed(1);
+        return ((row.Quantity / total) * 100).toFixed(1) + " %";
       },
     },
   ];
@@ -115,9 +114,10 @@ const PivotTable = () => {
             dimensions={dimensions}
             reduce={reduce}
             calculations={calculations}
-            activeDimensions={["Pais", "Tipo Negocio", "Categoria"]}
+            activeDimensions={["Pais"]}
             nPaginateRows={250}
-            subDimensionText={"Sub"}
+            subDimensionText={"Filtrar"}
+            soloText={" filtrar"}
           />
         </div>
       </div>
