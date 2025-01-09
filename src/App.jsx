@@ -117,7 +117,7 @@ const PivotTable = () => {
             activeDimensions={["Pais"]}
             nPaginateRows={250}
             subDimensionText={"Filtrar"}
-            soloText={" filtrar"}
+            soloText={" solo"}
           />
         </div>
       </div>
