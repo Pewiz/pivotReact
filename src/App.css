@@ -1,17 +1,47 @@
-body {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    background: #EDEDED;
-}
-
-main {
-    width: 800px;
-    margin: 10px auto;
-    padding: 10px 20px 30px;
-    background: #FFF;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
 .reactPivot-csvExport {
+    display: block;
+}
+
+.reactPivot-hideColumn {
     display: none;
+}
+
+.reactPivot {
+    margin-top: 0 !important;
+    box-shadow: none !important;
+    padding: 0px 20px 20px !important;
+}
+
+.reactPivot-dimensions select {
+    border-radius: 0.25rem;
+}
+
+.reactPivot tbody tr td {
+    border-right: 1px solid #ddd;
+}
+
+.reactPivot-results td.reactPivot-indent {
+    border-right: 1px solid #ddd !important;
+}
+
+
+.reactPivot-results table thead tr th {
+    border-right: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.reactPivot-results table {
+    border: 1px solid #ddd;
+    border-collapse: unset;
+    border-radius: 0.25rem;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.lastColumn {
+    border-right: none !important;
 }

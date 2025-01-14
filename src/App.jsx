@@ -10,7 +10,7 @@ const PivotTable = () => {
   useEffect(() => {
     fetch("/data.json")
       .then((res) => res.json())
-      .then((data) => setData(data.data));
+      .then((data) => setData(data));
   }, []);
 
   useEffect(() => {
@@ -32,6 +32,39 @@ const PivotTable = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const tableRows = pivotRef.current?.querySelectorAll("tr");
+
+    tableRows?.forEach((row) => {
+      const tableCells = Array.from(row.querySelectorAll("td"));
+
+      // Buscar celdas vacías o con texto "Total"
+      const emptyCells = tableCells.filter((cell) => {
+        const span = cell.querySelector("span");
+        return (
+          span &&
+          (span.textContent.trim() === "" ||
+            span.textContent.trim() === "Total")
+        );
+      });
+
+      if (emptyCells.length > 0) {
+        const firstCell = emptyCells[0];
+        const colspan = emptyCells.length;
+
+        // Configurar colspan y alinear el texto a la derecha
+        firstCell.setAttribute("colspan", colspan);
+        firstCell.style.textAlign = "end"; // Alineación a la derecha
+        firstCell.querySelector("span").textContent = "Total";
+
+        // Ocultar las celdas adicionales
+        emptyCells.slice(1).forEach((cell) => {
+          cell.style.display = "none"; // Ocultar celdas
+        });
+      }
+    });
+  }, [headers]);
 
   const dimensions = [
     { title: "Pais", value: "Country" },
@@ -114,10 +147,11 @@ const PivotTable = () => {
             dimensions={dimensions}
             reduce={reduce}
             calculations={calculations}
-            activeDimensions={["Pais"]}
+            activeDimensions={["Pais", "Tipo Negocio", "Categoria"]}
             nPaginateRows={250}
             subDimensionText={"Filtrar"}
             soloText={" solo"}
+            csvTemplateFormat={true}
           />
         </div>
       </div>
