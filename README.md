@@ -1,3 +1,8 @@
+# ReactPivot Webpack Implementation #
+This is the implementation of the [ReactPivotWebpack](https://github.com/ledsoft/react-pivot-webpack) library, which includes percentage **calculations by group** and some minor design adjustments. This project was built with React and initialized using Vite.
+
+I believe this implementation could be useful to others, as it provides functionality for commonly needed data calculations, such as calculating percentages by group.
+
 # ReactPivot Webpack #
 
 This is a Webpack-compatible version of the [ReactPivot](https://github.com/davidguttman/react-pivot) library.
