@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/runtime": "^7.26.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-pivot-webpack": "^5.0.2"
